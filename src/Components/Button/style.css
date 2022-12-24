@@ -1,0 +1,4 @@
+.MuiButton-root.btn {
+  text-transform: capitalize;
+  font-weight: 600;
+}

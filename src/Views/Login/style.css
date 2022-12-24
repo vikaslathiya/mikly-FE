@@ -1,0 +1,66 @@
+.MuiGrid-root.container {
+  border-radius: 10px;
+  box-shadow: 0px 0px 6px 0px gray;
+  text-align: center;
+  justify-content: center;
+  width: 25%;
+  margin: 10% auto auto;
+  background-color: white;
+}
+
+.MuiGrid-root.container::before {
+  content: "";
+  background: url(../../Assets/Images/cows-eating.jpg) no-repeat center
+    center/cover;
+  position: fixed;
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+.MuiTypography-root.heading {
+  border-radius: 7px 7px 0px 0px;
+  padding: 8px;
+  font-weight: 600;
+  background-color: #3f51b5;
+  color: white;
+  box-shadow: 0px 2px 4px -1px rgb(0 0 0 / 20%),
+    0px 4px 5px 0px rgb(0 0 0 / 14%), 0px 1px 10px 0px rgb(0 0 0 / 12%);
+}
+
+.MuiGrid-root.form {
+  margin-top: 8px;
+  padding: 0px 50px;
+}
+
+.MuiGrid-root.btn {
+  margin: 15px;
+  padding: 0px 34px;
+}
+
+.MuiGrid-root.footer {
+  margin: 12px;
+  color: gray;
+}
+
+.footerText {
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.MuiFormControl-root.formControl {
+  justify-content: left;
+  display: flex;
+  margin: 6px 0px;
+}
+
+.MuiFormControlLabel-root.from-label {
+  font-size: 1rem;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.54);
+  margin-left: 2px;
+  margin-right: 12px;
+}
