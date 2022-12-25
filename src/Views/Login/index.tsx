@@ -14,7 +14,11 @@ import CustomButton from "../../Components/Button";
 import Radio from "@material-ui/core/Radio";
 import "./style.css";
 import { useDispatch, useSelector } from "react-redux";
-import { ILogin, LoginAction } from "../../Redux/Actions/loginAction";
+import {
+  ILogin,
+  LoginAction,
+  SignUpAction,
+} from "../../Redux/Actions/loginAction";
 import { IRedux } from "../../utils/types";
 
 const LoginPage = () => {
@@ -25,7 +29,6 @@ const LoginPage = () => {
 
   const dispatch = useDispatch();
   const AuthState = useSelector((state: IRedux) => state.Auth);
-  console.log("AuthState", AuthState.loading);
 
   const inputChangeHandler = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -42,38 +45,8 @@ const LoginPage = () => {
   };
 
   const userAuthHandler = () => {
-    // setLoading(true);
-    // if (isLogIn) {
-    dispatch(LoginAction(userInput));
-    // console.log("login..................................", userInput);
-    //   dispatch(
-    //     LoginUser(userInput, allUsers, history, ShowSnackbar, setLoading)
-    //   );
-    // } else {
-    //   const matchedMobile = allUsers.find(
-    //     (user) => user.mobileNo === userInput?.mobileNo
-    //   );
-    //   let newAgentCode = 1001;
-    //   if (allUsers?.length !== 0) {
-    //     newAgentCode = Number(allUsers[allUsers?.length - 1].agentCode) + 1;
-    //   }
-    //   // const code = Math.trunc(Math.random() * 100000)
-    //   // console.log(userInput, matchedMobile)
-    //   if (
-    //     matchedMobile === undefined &&
-    //     userInput?.name !== undefined &&
-    //     userInput?.password !== undefined &&
-    //     userInput?.mobileNo !== undefined
-    //   ) {
-    //     dispatch(SignUpUser({ ...userInput, agentCode: newAgentCode }));
-    //   } else if (matchedMobile !== undefined) {
-    //     setLoading(false);
-    //     ShowSnackbar("error", "Entered Mobile No. already registered!");
-    //   } else {
-    //     setLoading(false);
-    //     ShowSnackbar("error", "Enter Valid details");
-    //   }
-    // }
+    if (isLogIn) dispatch(LoginAction(userInput));
+    else dispatch(SignUpAction(userInput));
   };
 
   return (
@@ -125,17 +98,7 @@ const LoginPage = () => {
               <CustomTextField
                 fullWidth
                 autoFocus
-                label="Username"
-                onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  inputChangeHandler(e, "username")
-                }
-              />
-            )}
-
-            {isLogIn && userInput?.role === "Admin" && (
-              <CustomTextField
-                fullWidth
-                autoFocus
+                type="number"
                 label="Agent Code"
                 onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
                   inputChangeHandler(e, "agentCode")
@@ -154,12 +117,24 @@ const LoginPage = () => {
               />
             )}
 
+            {((isLogIn && userInput?.role !== "User") || !isLogIn) && (
+              <CustomTextField
+                fullWidth
+                autoFocus
+                label="Username"
+                onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  inputChangeHandler(e, "username")
+                }
+              />
+            )}
+
             {!isLogIn && (
               <CustomTextField
                 fullWidth
+                type="number"
                 label="Mobile No."
                 onchange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  inputChangeHandler(e, "mobileNo")
+                  inputChangeHandler(e, "phone")
                 }
               />
             )}
@@ -186,7 +161,6 @@ const LoginPage = () => {
               }
             />
           </Grid>
-
           <Grid item lg={12} md={12} xs={12} classes={{ root: "btn" }}>
             <CustomButton
               fullWidth

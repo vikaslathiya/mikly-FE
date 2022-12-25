@@ -1,11 +1,21 @@
-import React from "react";
+import { useSelector } from "react-redux";
 import "./App.css";
-import LoginPage from "./Views/Login";
+import CustomizedSnackbars from "./Components/Toast";
+import Routes from "./Routes";
+import { IRedux } from "./utils/types";
 
 function App() {
+  const ToastState = useSelector((state: IRedux) => state.Toast);
+  console.log("ToastState", ToastState);
+
   return (
     <div className="App">
-      <LoginPage />
+      <CustomizedSnackbars
+        message={ToastState.message}
+        severity={ToastState.color}
+      />
+
+      <Routes />
     </div>
   );
 }
